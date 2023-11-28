@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!--Graph-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Conversor de Monedas</title>
+</head>
+<body>
+
+    <section class="container">
+
+
+        <form action="">
+            <h1>Conversor de Monedas</h1>
+            <input type="text" id="chileanPesos" placeholder="Chilean pesos converter"
+                   autofocus autocomplete="off" min="0">
+            <div id="errorMensaje" style="display: none; color: red;"></div>
+        </form>
+
+        <select id="coinSelector">
+
+        </select>
+
+        <button id="transform">Transform</button>
+
+        <h2>Result: <span id="resultadoConversion"></span></h2>
+
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+
+    </section>
+    <script src="./assets/js/script.js"></script>
+
+
+</body>
+</html>

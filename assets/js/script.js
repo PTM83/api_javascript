@@ -2,9 +2,6 @@ async function obtenerDatosMonedas() {
     try{
         const endpoint = "https://mindicador.cl/api/";
         const response = await fetch(endpoint);
-        /*if (!response.ok){
-            trow new Error(`HTTP error! Status: ${response.status}`);
-        }*/
         return await response.json();
     } catch(error){
         console.log("Error al obtener datos de la API:", error);
@@ -25,29 +22,6 @@ async function LlenarOpcionesMonedas() {
         });
     }
 }
-
-/*function LlenarOpcionesMonedas(datos) {
-    const selector = document.getElementById('coinSelector');
-    for (const key in datos) {
-        if (datos[key].unidad_medida === 'Pesos') {
-            const opcion = document.createElement('option');
-            opcion.value = key;
-            opcion.textContent = datos[key].codigo;
-            selector.appendChild(opcion);
-        }
-    }
-}*/
-
-/*    const select = document.getElementById("coinSelector");
-    Object.keys(datos).forEach(key => {
-        if (typeof datos[key] === "object" && datos[key] !== null) {
-            const opcion = document.createElement("option");
-            opcion.value = key;
-            opcion.textContent = key.toUpperCase();
-            select.appendChild(opcion);
-        }
-    });
-}*/
 
 function convertirMoneda(montoPesos, tipoCambio) {
     return montoPesos / tipoCambio;
@@ -84,27 +58,6 @@ function ocultarError() {
 }
 
 
-/*document.getElementById("transform").addEventListener("click", async () => {
-    const montoPesos = document.getElementById("chileanPesos").value;
-    const monedaSeleccionada = document.getElementById("coinSelector").value;
-    const datosMonedas = await obtenerDatosMonedas();
-
-    if (datosMonedas && datosMonedas[monedaSeleccionada]) {
-        const resultado = convertirMoneda(montoPesos,datosMonedas[monedaSeleccionada].valor);
-        document.getElementById("resultadoConversion").textContent = resultado.toFixed(2);
-    } else {
-        console.error("No se encontró información para la moneda seleccionada.");
-    }
-});
-
-document.addEventListener('DOMContentLoaded', async () => {
-    const datosMonedas = await obtenerDatosMonedas();
-    if (datosMonedas) {
-        LlenarOpcionesMonedas(datosMonedas);
-    }
-});*/
-
-
 function validarEntrada() {
     const campo = document.getElementById("chileanPesos");
     let valor = campo.value;
@@ -137,15 +90,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
-    /*document.getElementById('transform').addEventListener('click', () => {
-        const monto = document.getElementById('chileanPesos').value;
-        console.log(monto);
-        const monedaSeleccionada = document.getElementById('coinSelector').value;
-        const tipoCambio = datos[monedaSeleccionada].valor;
-        const resultado = convertirMoneda(monto, tipoCambio);
-        document.getElementById('resultadoConversion').textContent = `${resultado.toFixed(2)} ${datos[monedaSeleccionada].nombre}`;
-    });
-});*/
 
 //Prepara gráfica
 
@@ -160,10 +104,10 @@ function setupChart() {
             const ans = await response.json();
 
             const labels1 = ans.serie.map(answer => answer.fecha.substring(0,10));
-            const labels = labels1.reverse().slice(0,10);
+            const labels = labels1.slice(0,10).reverse();
 
             const data1 = ans.serie.map(answer => answer.valor);
-            const data = data1.reverse().slice(0,10);
+            const data = data1.slice(0,10).reverse();
 
             //console.log(data);
 
@@ -213,44 +157,6 @@ function renderGraphic(chartData) {
 }
 
 
-/*async function setupChart(coin) {
-    try {
-        const endpoint = `https://mindicador.cl/api/${coin}`;
-        const response = await fetch(endpoint);
-        const ans = await response.json();
-
-        const labels = ans.serie.map(answer => answer.fecha.substring(0, 10));
-        const data = ans.serie.map(answer => answer.valor);
-
-        return {
-            labels,
-            datasets: [{
-                label: "Tipo de Cambio",
-                borderColor: "rgb(255, 99, 132)",
-                data // Asegúrate de que esté 'data', no 'valores'
-            }]
-        };
-    } catch (error) {
-        console.error("Error al obtener datos de la API:", error);
-    }
-}
-
-document.getElementById('transform').addEventListener('click', async () => {
-    const coin = document.getElementById('coinSelector').value;
-    const chartData = await setupChart(coin);
-    if (chartData) {
-        renderChart(chartData);
-    }
-});
-
-function renderChart(chartData) {
-    const ctx = document.getElementById("myChart").getContext("2d");
-    const chart = new Chart(ctx, {
-        type: "line",
-        data: chartData
-    });
-}
-*/
 
 
 async function main() {
